@@ -1,0 +1,7 @@
+<launch>
+    <!--NODES-->
+    <node name="hello_world_py_node" pkg="lab2_part1_pkg" type="my_first_node.py"/>
+    <node name="hello_world_cpp_node" pkg="lab2_part1_pkg" type="hello_world_node_cpp"/>
+    <!--PARAMETERS-->
+    <param name="/hello_publish_frequency" value="3.0"/>
+</launch>
