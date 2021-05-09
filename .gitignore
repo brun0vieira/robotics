@@ -1,3 +1,17 @@
 *.make
 *.cmake
 *.c
+*.zsh
+*.sh
+*.bash
+*.lock
+*.built_by
+*.rosinstall
+*.xml
+*.txt
+/.vscode
+/gtest
+/catkin_generated
+/atomic_configure
+/CMakeFiles
+/pkgconfig
