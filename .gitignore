@@ -9,6 +9,7 @@
 *.rosinstall
 *.xml
 *.txt
+*Makefile
 /.vscode
 /gtest
 /catkin_generated
