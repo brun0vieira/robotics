@@ -1,3 +1,0 @@
-sensor_msgs/JoinState req_joint_state
----
-geometry.msgs/Pose resp_pose
