@@ -7,6 +7,8 @@ from interactive_markers.interactive_marker_server import InteractiveMarkerServe
 """
 TODO add any missing imports (e.g. custom messagess/services)
 """
+#from tr5_kinematics_source_code.tr5_kinematics.srv import DoForwardKinematics
+from tr5_kinematics.srv import DoForwardKinematics
 
 class Controller:
 
@@ -49,8 +51,15 @@ class Controller:
         """
         TODO initialize ROS services and message publishers/subscribers
         """
+        # msg subscribers
         self.gui_tp_sub = rospy.Subscriber(self.tp_gui_jt, JointState, self.gui_joints_callback)
         
+        # msg publishers
+        self.goal_tp_pub = rospy.Publisher(self.tp_goal_jt, JointState, queue_size=10)
+        self.marker_pub = rospy.Publisher(self.tp_goal_ps, Marker, queue_size=10)
+
+        # services
+        self.handle_fk_svc = rospy.ServiceProxy(self.svc_fk, DoForwardKinematics)
 
     def create_interactive_marker(self):
         self.i_marker.header.frame_id = "/world"
@@ -108,26 +117,30 @@ class Controller:
             rospy.logerr("Failed to call service inverse kinematics...")
 
     def gui_joints_callback(self, msg):
-
+    
         # ignore values from JointState GUI when in ik mode
         if(self.ik_mode):
             return
-
+    
         self.goal_tp_pub.publish(msg)
-
-        """
-        TODO create and fill the ROS service proxy
-        """
         
-        """
-        TODO call the required ROS service
-        """
-       
+        # call the required ROS service
+        rospy.wait_for_service(self.svc_fk)
+        res = self.handle_fk_svc.call(msg)
+        
         if res:             
-            """
-            TODO update rviz marker's pose from forward kinematics and publish it
-            """
-            
+            # update rviz marker's pose from forward kinematics and publish it
+            '''
+            self.m.pose.position.x = res.resp_pose.position.x
+            self.m.pose.position.y = res.resp_pose.position.y
+            self.m.pose.position.y = res.resp_pose.position.y
+            self.m.pose.orientation.x = res.resp_pose.orientation.x
+            self.m.pose.orientation.y = res.resp_pose.orientation.y
+            self.m.pose.orientation.z = res.resp_pose.orientation.z
+            self.m.pose.orientation.w = res.resp_pose.orientation.w
+            '''
+            self.m.pose = res.resp_pose
+            self.marker_pub.publish(self.m) 
         else:
             rospy.logerr("Failed to call service for forward kinematics...")
 
