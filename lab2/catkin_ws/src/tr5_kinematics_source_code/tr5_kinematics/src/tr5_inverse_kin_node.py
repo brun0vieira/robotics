@@ -22,15 +22,15 @@ def poseToMatrix(pose):
     orientation = []
     
     # translation expressed as a tuple (x,y,z)
-    position = position.append(pose.position.x)
-    position = position.append(pose.position.y)
-    position = position.append(pose.position.z)
+    position.append(pose.position.x)
+    position.append(pose.position.y)
+    position.append(pose.position.z)
 
     # rotation quaternion expressed as a tuple (x,y,z,w)
-    orientation = orientation.append(pose.orientation.x)
-    orientation = orientation.append(pose.orientation.y)
-    orientation = orientation.append(pose.orientation.z)
-    orientation = orientation.append(pose.orientation.w)
+    orientation.append(pose.orientation.x)
+    orientation.append(pose.orientation.y)
+    orientation.append(pose.orientation.z)
+    orientation.append(pose.orientation.w)
 
     # converts a tf into a 4x4 matrix
     # |nx sx ax px|
@@ -74,7 +74,7 @@ def doInverseKinematics(srv):
     theta3 = math.atan(sqrt(1/(c_theta3**2)-1))
     theta2 = arctg2(((a2 + a3*math.cos(theta3))*(-d1+pz-d5*math.sin(theta234))), 
                     ((a2+a3*math.cos(theta3))*(-d5*math.cos(theta234) + math.cos(theta1)*px + math.sin(theta1)*py) + a3*math.sin(theta3)*(-d1+pz-d5*math.sin(theta234))))
-    theta4 = theta234 - theta2 - theta3
+    theta4 = theta2 - theta3
     theta5 = math.atan((-ny*math.cos(theta1) + nx*math.sin(theta1)) / (-sy*math.cos(theta1) + sx*math.sin(theta1)))
 
     response.header.stamp = rospy.Time.now()
