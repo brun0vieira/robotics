@@ -64,7 +64,7 @@ def sqrt(x):
 def doInverseKinematics(srv):
     response = JointState()
 
-    # converts tf into a matrix and get its entries
+    # converts req_pose into a matrix and get its entries
     (nx,ny,nz,sx,sy,sz,ax,ay,az,px,py,pz) = poseToMatrix(srv.req_pose)
 
     theta1 = arctg2(py,px) 
@@ -76,6 +76,12 @@ def doInverseKinematics(srv):
                     ((a2+a3*math.cos(theta3))*(-d5*math.cos(theta234) + math.cos(theta1)*px + math.sin(theta1)*py) + a3*math.sin(theta3)*(-d1+pz-d5*math.sin(theta234))))
     theta4 = theta234 - theta2 - theta3
     theta5 = math.atan((-ny*math.cos(theta1) + nx*math.sin(theta1)) / (-sy*math.cos(theta1) + sx*math.sin(theta1)))
+
+    response.header.stamp = rospy.Time.now()
+    response.name = ['tr5shoulder_pan_joint', 'tr5shoulder_lift_joint', 'tr5elbow_joint', 'tr5wrist_1_joint', 'tr5wrist_2_joint', 'tr5left_finger_joint', 'tr5right_finger_joint']
+    response.position = [theta1, theta2, theta3, theta4, theta5, 0.0, 0.0]
+    response.effort = []
+    response.velocity = []
 
     return DoInverseKinematicsResponse(response)
 
