@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <!-- DEBUG FLAGS -->
+    
+    <!--arg name="sensors"                 default="true" /-->
+
+
+    <!-- SETUP MACHINE ENVIRONMENT -->
+   
+
+    <!-- LOAD GLOBAL PARAMETERS --> 
+
+    <!--env name="ROS_MASTER_URI" value="http://imaupc1:11311" /-->
+
+    
+    <!-- LAUNCH SYSTEM MODULES -->
+
+    <!--include file="$(find rob_bringup)/launch/supervision/supervision.launch"           /-->
+    <!--include file="$(find rob_bringup)/launch/diagnostics/diagnostics.launch"           /-->
+    <!--include file="$(find rob_bringup)/launch/sensors/sensors.launch"                   /-->
+    <!--include file="$(find rob_bringup)/launch/actuators/actuators.launch"               /-->
+    <!--include file="$(find rob_bringup)/launch/cognition/cognitions.launch"              /-->
+
+</launch>

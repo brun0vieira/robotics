@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!--- Run SLAM -->
+  <include file="$(find rob_bringup)/launch/cognition/navigation/cognition_navigation_slam_gmapping.launch" />
+  <!--include file="$(find rob_bringup)/launch/cognition/navigation/cognition_navigation_slam_XXX.launch" /-->
+
+  <!--- Run Move Base node-->
+   <arg name="no_static_map" default="false"/>
+   <include file="$(find rob_bringup)/launch/cognition/navigation/cognition_navigation_move_base.launch" />
+
+</launch>
