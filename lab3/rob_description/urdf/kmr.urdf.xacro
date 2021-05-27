@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:include filename="$(find lab3)/rob_description/urdf/kmr.transmission.xacro" />
+
+    <property name="kmr_mass" value="390" /> 
+
+    <property name="kmr_height" value=".700" />
+    <property name="kmr_length_with_scanners" value="1.08" />
+    <property name="kmr_width_with_scanners" value=".630" />
+
+    <property name="max_velocity_longitudinal" value="1" />
+    <property name="max_velocity_lateral" value=".7" /> 
+    <property name="max_velocity_angular" value=".5" />
+
+    <xacro:macro name="kmr_robot" params="prefix joint_limited">
+    
+        <link name="${prefix}base_link" >
+            <visual>
+                <geometry>
+                    <mesh filename="package://lab3/rob_description/meshes/INTMOB_S.dae" />
+                </geometry>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <material name="LightGrey">
+                    <color rgba="0.7 0.7 0.7 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="${kmr_length_with_scanners} ${kmr_width_with_scanners} ${kmr_height}"/>
+                </geometry>
+                <origin xyz="0.0 0.0 ${kmr_height/2}" rpy="0.0 0.0 0.0"/>
+            </collision>
+            <!--<xacro:cylinder_inertial radius="0.06" length="0.05" mass="${base_mass}">
+                <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+            </xacro:cylinder_inertial>-->
+        </link>
+
+        <joint name="LiDAR_front" type="fixed">
+            <parent link="${prefix}base_link" />
+            <child link = "${prefix}lidar_front_frame" />
+            <origin xyz=".487 -.255 0" rpy="0.0 0.0 -0.383"/> <!-- w =  0.924 ????-->
+        </joint>
+
+        <joint name="LiDAR_back" type="fixed">
+            <parent link="${prefix}base_link" />
+            <child link = "${prefix}lidar_back_frame" />
+            <origin xyz="-.438 .255 0" rpy="0.0 0.0 -0.924" /> <!-- w =  -0.383 ????-->
+        </joint>
+        
+        <joint name="GPS" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link = "${prefix}gps_frame" />
+            <origin xyz=".390 .185 .450" rpy="0.0 0.0 -0.707" /> <!-- w =   0.707 ????-->
+        </joint>
+
+        <joint name="IMU" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link = "${prefix}imu_frame" />
+            <origin xyz=".390 .185 .450" rpy="0.0 0.0 -0.707" /> <!-- w = 0.707 ????-->
+        </joint> 
+
+        <link name="${prefix}lidar_front_frame">
+            <origin xyz=".487 -.255 0" rpy="0.0 0.0 -0.383"/>
+        </link>
+
+        <link name="${prefix}lidar_back_frame">
+            <origin xyz="-.438 .255 0" rpy="0.0 0.0 -0.924"/>
+        </link>
+
+        <link name="${prefix}gps_frame">
+            <origin xyz=".390 .185 .450" rpy="0.0 0.0 -0.707"/>
+        </link>
+
+        <link name="${prefix}imu_frame">
+            <origin xyz=".390 .185 .450" rpy="0.0 0.0 -0.707"/>
+        </link>
+
+    </xacro:macro>
+</robot>
