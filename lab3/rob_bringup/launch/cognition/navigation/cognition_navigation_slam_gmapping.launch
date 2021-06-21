@@ -10,8 +10,8 @@
 
       map_update_interval: 0.5 # Publish new map
 
-      maxUrange: 1.0                         # @TODO: Should be just less than sensor range
-      maxRange: 1.0                        # @TODO: Should be just greater than sensor range
+      maxUrange: 31.0                        # @TODO: Should be just less than sensor range
+      maxRange: 29.0                        # @TODO: Should be just greater than sensor range
       particles: 150 # Increased from 80
 
       # Update frequencies
@@ -25,10 +25,10 @@
       ymin: 0.0
       xmax: 0.0
       ymax: 0.0 -->
-      xmin: -100.0
-      ymin: -100.0
-      xmax: 100.0
-      ymax: 100.0
+      xmin: -22.0
+      ymin: -20.0
+      xmax: 22.0
+      ymax: 20.0
       delta: 0.05
 
       # All default

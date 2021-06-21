@@ -35,8 +35,8 @@
     <param name="global_costmap/width" value="100.0" if="$(arg no_static_map)"/>  <!-- @TODO: Replace with the correct value -->
     <param name="global_costmap/height" value="100.0" if="$(arg no_static_map)"/> <!-- @TODO: Replace with the correct value -->
 
-    <remap from="cmd_vel" to="XXX" /> <!-- @TODO: Replace with the correct value -->
-    <remap from="odom" to="XXX" /> <!-- @TODO: Replace with the correct value -->
+    <remap from="cmd_vel" to="/kmr/cmd_vel" /> <!-- @TODO: Replace with the correct value -->
+    <remap from="odom" to="/kmr/odom" /> <!-- @TODO: Replace with the correct value -->
 
 
   </node>

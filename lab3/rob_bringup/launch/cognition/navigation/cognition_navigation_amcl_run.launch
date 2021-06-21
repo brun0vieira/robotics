@@ -1,0 +1,6 @@
+<launch>
+    <include file="$(find rob_description)/launch/kmr.launch" />
+    <include file="$(find rob_bringup)/launch/cognition/navigation/cognition_navigation_move_base.launch" />
+    <include file="$(find rob_bringup)/launch/cognition/navigation/cognition_navigation_amcl.launch" />
+    <node pkg="map_server" type="map_server" name="map_server" args="$(find rob_bringup)/maps/map.yaml"/>
+</launch>

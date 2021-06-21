@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="rvizconfig" default="$(find rob_bringup)/params/rob.rviz" />
+  <arg name="gui" default="true" />
+  <param name="robot_description" command="$(find xacro)/xacro '$(find rob_description)/urdf/kmr.urdf.xacro'" />
+  <node name="rob_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+</launch>

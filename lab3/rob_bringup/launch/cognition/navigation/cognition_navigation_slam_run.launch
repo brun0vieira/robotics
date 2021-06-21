@@ -2,6 +2,7 @@
 <launch>
 
   <!--- Run SLAM -->
+  <include file="$(find rob_description)/launch/kmr.launch" />
   <include file="$(find rob_bringup)/launch/cognition/navigation/cognition_navigation_slam_gmapping.launch" />
   <!--include file="$(find rob_bringup)/launch/cognition/navigation/cognition_navigation_slam_google.launch" /-->
 
